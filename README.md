@@ -4,16 +4,9 @@
 
 Model groundwater discharge dynamics using a simplified conceptual reservoir approach and numerical integration techniques available in Apache Commons Math.
 
-References:
+This example is from Rimmer et al. (2012) paper, the goal is to simulate the temporal evolution of hydraulic head using ordinary differential equations (ODEs).
 
-> Rimmer, A. & Hartmann, A.  
-> *Simplified Conceptual Structures and Analytical
->Solutions for Groundwater Discharge
-> Using Reservoir Equationss*
-
-The goal is to simulate the temporal evolution of hydraulic head using ordinary differential equations (ODEs).
-
-The numerical Runge-Kutta solution is compared against the analytical solution derived from the reservoir equation in Rimmer et al. ().
+The numerical Runge-Kutta solution is compared against the analytical solution derived from the reservoir equation in Rimmer et al. (2012).
 
 ---
 
@@ -23,7 +16,7 @@ The exercise uses the following values adapted from the Uja Spring aquifer examp
 
 | Parameter | Value | Description |
 |---|---|---|
-| \(A n\) | 80000 m² | Effective aquifer storage |
+| \(A n\) | 80000 m² | Effective aquifer storage A * n in the paper |
 | \(Q_p\) | 8200 m³/day | Pumping rate |
 | \(Q_{in}\) | 8200 m³/day | Recharge inflow |
 | \(K\) | 1980 days | Aquifer response time |
