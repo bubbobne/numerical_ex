@@ -2,146 +2,75 @@
 
 ## Overview
 
-Solve a reservoir routing problem using numerical integration techniques available in Apache Commons Math.
+Model groundwater discharge dynamics using a simplified conceptual reservoir approach and numerical integration techniques available in Apache Commons Math.
 
-The goal is to model the temporal evolution of water storage inside a reservoir using a (non) linear ordinary differential equation (ODE). The exercise is inspired by:
+References:
 
-> *Demonstrating Reservoir Routing in the Classroom: Physical and Mathematical Modeling*  
-> James Kilduff, Assistant Professor
+> Rimmer, A. & Hartmann, A.  
+> *Simplified Conceptual Structures and Analytical
+>Solutions for Groundwater Discharge
+> Using Reservoir Equationss*
 
-In the exercise we compare the numerical Runge-Kutta solution against an analytical solution.
+The goal is to simulate the temporal evolution of hydraulic head using ordinary differential equations (ODEs).
 
----
-
-# Physical Problem
-
-We consider a reservoir with:
-
-- constant surface area
-- inflow hydrograph
-- nonlinear outflow relation
-
-The reservoir storage changes according to the continuity equation:
-
-\[
-\frac{dS}{dt}=I(t)-Q(t)
-\]
-
-where:
-
-- \(S\) = reservoir storage \([L^3]\)
-- \(I(t)\) = inflow discharge \([L^3/T]\)
-- \(Q(t)\) = outflow discharge \([L^3/T]\)
+The numerical Runge-Kutta solution is compared against the analytical solution derived from the reservoir equation.
 
 ---
 
-# Reservoir Geometry
+# Model Parameters
 
-The reservoir is assumed to have a constant surface area:
+The exercise uses the following values adapted from the Uja Spring aquifer example:
 
-\[
-A = 71
-\]
+| Parameter | Value | Description |
+|---|---|---|
+| \(A n\) | 80000 m² | Effective aquifer storage |
+| \(Q_p\) | 8200 m³/day | Pumping rate |
+| \(Q_{in}\) | 8200 m³/day | Recharge inflow |
+| \(K\) | 1980 days | Aquifer response time |
 
-The water level \(h\) is related to storage by:
+Java initialization:
 
-\[
-S=A\,h
-\]
-
-where:
-
-- \(A = 71\)
-- \(h\) = water depth
-
----
-
-# Outflow Equation
-
-The outflow is governed by a nonlinear square-root relationship:
-
-\[
-Q=c_d\sqrt{h}
-\]
-
-with:
-
-\[
-c_d = 5.59 \times 0.78
-\]
-
-Since:
-
-\[
-h = \frac{S}{A}
-\]
-
-the discharge equation becomes:
-
-\[
-Q=c_d\sqrt{\frac{S}{A}}
-\]
-
-This nonlinear equation makes the problem suitable for numerical integration methods such as Runge-Kutta.
-
----
-
-# Simulation Setup
-
-## Time Step
-
-```text
-Δt = 10
+```java
+double axn = 80000.0;
+double qp = 8200.0;
+double qin = 8200.0;
+double k = 1980.0;
 ```
 
 ---
 
-## Inflow Phase
+# Initial Conditions
 
-For:
+Before pumping begins, the aquifer is assumed to be at steady state.
 
-```text
-0 < t < 300
-```
-
-a constant inflow is applied:
+The initial hydraulic head is:
 
 \[
-I = 12.3
+h_0=-100 \text{ m}
 \]
 
-The reservoir progressively fills.
+corresponding to groundwater levels measured before intensive pumping activities.
+
+The long-term steady-state solution after pumping is approximately:
+
+\[
+h_{\infty}=-280 \text{ m}
+\]
 
 ---
-
-## Drainage Phase
-
-For:
-
-```text
-t > 300
-```
-
-the inflow becomes zero:
-
-\[
-I = 0
-\]
-
-The reservoir drains only through the outlet.
-
 
 # References
 
-Kilduff, J.
+Rimmer, A. & Hartmann, A.
 
-> *Demonstrating Reservoir Routing in the Classroom: Physical and Mathematical Modeling*
+> *Simplified Conceptual Structures and Analytical Solutions for Groundwater Discharge Using Reservoir Equations*
 
-Apache Commons Math Documentation:
+Hydrogeology references:
+
+- Bear, J. — *Hydraulics of Groundwater*
+- Freeze & Cherry — *Groundwater*
+- Todd & Mays — *Groundwater Hydrology*
+
+Apache Commons Math:
 
 - https://commons.apache.org/proper/commons-math/
-
-Hydrological background:
-
-- Chow, Maidment & Mays — *Applied Hydrology*
-- Dingman — *Physical Hydrology*
