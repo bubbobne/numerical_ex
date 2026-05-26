@@ -65,12 +65,6 @@ Rimmer, A. & Hartmann, A.
 
 > *Simplified Conceptual Structures and Analytical Solutions for Groundwater Discharge Using Reservoir Equations*
 
-Hydrogeology references:
-
-- Bear, J. — *Hydraulics of Groundwater*
-- Freeze & Cherry — *Groundwater*
-- Todd & Mays — *Groundwater Hydrology*
-
 Apache Commons Math:
 
 - https://commons.apache.org/proper/commons-math/
