@@ -27,14 +27,10 @@ public class ReservoirApacheMathODE implements FirstOrderDifferentialEquations {
 		yDot[0] = -1 / k * y[0] + (qin - qp) / axn;
 	}
 
-	public double computeOutflow(double h) {
-
-		return (axn / k) * h;
-	}
-
 	public double computeDischarge(double hNumerical) {
 		// TODO Auto-generated method stub
-		return 0;
+		return (axn / k) * hNumerical;
+
 	}
 
 }

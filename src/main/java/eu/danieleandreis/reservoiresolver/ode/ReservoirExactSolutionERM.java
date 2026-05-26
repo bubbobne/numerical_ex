@@ -2,17 +2,19 @@ package eu.danieleandreis.reservoiresolver.ode;
 
 public class ReservoirExactSolutionERM {
 	private double k = 0;
-	private double h0 = 0;
 	private double aXn = 0;
 	private double qin = 0;
 	private double qp = 0;
+	private double h0 = 0;
+	private double coeff = 0;
 
-	public ReservoirExactSolutionERM(double k, double aXn, double h0, double qin, double qp) {
+	public ReservoirExactSolutionERM(double k, double aXn, double qin, double qp) {
 		this.aXn = aXn;
 		this.k = k;
-		this.h0 = h0;
 		this.qin = qin;
 		this.qp = qp;
+		coeff = k / aXn;
+		h0 = coeff * qin;
 	}
 
 	public double getQ(double t) {
@@ -20,12 +22,11 @@ public class ReservoirExactSolutionERM {
 	}
 
 	public double getH(double t) {
-		double coeff = k / aXn;
-		if(t==0) {
-			return h0 =coeff * qin;
-
+		if (t == 0) {
+			return h0;
 		}
-		return (coeff * qin - coeff * (qin - qp)) * Math.exp(-t / k) + coeff * (qin - qp);
+
+		return (h0 - coeff * (qin - qp)) * Math.exp(-t / k) + coeff * (qin - qp);
 	}
 
 }

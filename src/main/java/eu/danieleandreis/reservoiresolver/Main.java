@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import org.apache.commons.math3.ode.nonstiff.ClassicalRungeKuttaIntegrator;
 import org.apache.commons.math3.ode.sampling.StepHandler;
@@ -24,61 +25,51 @@ public class Main {
 		double t0 = 0.0;
 		double tEnd = 12000.0;
 
-		double h0 = 180.0; // initial hydraulic head [m]
+		double h0 = 180.3999; // initial hydraulic head [m]
 
 		double[] state = new double[] { h0 };
-		int n = (int) (Math.floor((tEnd - t0) / dt) + 1);
+		var hRk = new ArrayList<Double>();
 
-		double[] hRk = new double[n];
 		ReservoirApacheMathODE ode = new ReservoirApacheMathODE(responseTime, effectiveStorage, recharge, pumping);
 
 		ClassicalRungeKuttaIntegrator integrator = new ClassicalRungeKuttaIntegrator(dt);
-
-		int idx = 0;
 
 		integrator.addStepHandler(new StepHandler() {
 
 			@Override
 			public void init(double t0, double[] y0, double t) {
-
-				//time[0] = t0;
-
-				hRk[0] = y0[0];
-
-				idx = 1;
+				hRk.add(y0[0]);
 			}
 
 			@Override
 			public void handleStep(StepInterpolator interpolator, boolean isLast) {
-				//time[idx] = interpolator.getCurrentTime();
-
-				hRk[idx] = interpolator.getInterpolatedState()[0];
-
-				idx++;
+				hRk.add(interpolator.getInterpolatedState()[0]);
 			}
 		});
 
 		integrator.integrate(ode, t0, state, tEnd, state);
 
-		ReservoirExactSolutionERM exactSolution = new ReservoirExactSolutionERM(responseTime, effectiveStorage, h0,
+		ReservoirExactSolutionERM exactSolution = new ReservoirExactSolutionERM(responseTime, effectiveStorage,
 				recharge, pumping);
 
-		Path output = Path.of("out_step1.csv");
+		Path output = Path.of("/home/andreisd/Desktop/out_step1.csv");
 
 		try (BufferedWriter writer = Files.newBufferedWriter(output)) {
 			writer.write("time,h_rk,h_exact,error,q_rk,q_exact");
-			for (int i = 0; i < idx; i++) {
+			int i = 0;
+			for (var hEstimate : hRk) {
 				double t = t0 + i * dt;
 				double hExact = exactSolution.getH(t);
 				double qExact = exactSolution.getQ(t);
-				double qNumerical = 0;
-				double error = hRk[i] - hExact;
+				double qNumerical = ode.computeDischarge(hEstimate);
+				double error = hEstimate - hExact;
 				writer.newLine();
-				writer.write(t + "," + hRk[i] + "," + hExact + "," + error + "," + qNumerical + "," + qExact);
+				writer.write(t + "," + hEstimate + "," + hExact + "," + error + "," + qNumerical + "," + qExact);
 				writer.newLine();
+				i++;
 			}
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		System.out.println("Simulation completed.");
