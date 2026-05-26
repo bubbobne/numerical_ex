@@ -34,17 +34,12 @@ double k = 1980.0;
 
 # Initial Conditions
 
-Before pumping begins, the aquifer is assumed to be at steady state.
-
-The initial hydraulic head is:
-
+Before pumping begins, the aquifer is assumed to be at steady state. The initial hydraulic head, corresponding to the groundwater level, is:
 \[
-h_0=-100 \text{ m}
+h_0=-100 \text{ m asl}
 \]
 
-corresponding to groundwater levels measured before intensive pumping activities.
-
-The long-term steady-state solution after pumping is approximately:
+Then an intensive pumping activities was started and the long-term steady-state (after about 30 years) solution after pumping is approximately:
 
 \[
 h_{\infty}=-280 \text{ m}
