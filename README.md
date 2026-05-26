@@ -13,7 +13,7 @@ References:
 
 The goal is to simulate the temporal evolution of hydraulic head using ordinary differential equations (ODEs).
 
-The numerical Runge-Kutta solution is compared against the analytical solution derived from the reservoir equation.
+The numerical Runge-Kutta solution is compared against the analytical solution derived from the reservoir equation in Rimmer et al. ().
 
 ---
 
@@ -61,9 +61,7 @@ h_{\infty}=-280 \text{ m}
 
 # References
 
-Rimmer, A. & Hartmann, A.
-
-> *Simplified Conceptual Structures and Analytical Solutions for Groundwater Discharge Using Reservoir Equations*
+Rimmer, A., & Hartmann, A. J. (2012). Simplified conceptual structures and analytical solutions for groundwater discharge using reservoir equations. In D. P. C. Nayak (Ed.), Water Resources Management and Modeling. InTech. https://doi.org/10.5772/34803
 
 Apache Commons Math:
 
