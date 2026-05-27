@@ -2,6 +2,11 @@ package eu.danieleandreis.reservoiresolver.ode;
 
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 
+/**
+ * ODE implementation
+ *
+ * @author Daniele Andreis and Giuseppe Formetta
+ */
 public class ReservoirApacheMathODE implements FirstOrderDifferentialEquations {
 
 	private final double axn;

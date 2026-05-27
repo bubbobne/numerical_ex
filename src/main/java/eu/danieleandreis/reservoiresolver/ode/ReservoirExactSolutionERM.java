@@ -1,5 +1,10 @@
 package eu.danieleandreis.reservoiresolver.ode;
 
+/**
+ * Exact Solution
+ *
+ * @author Daniele Andreis and Giuseppe Formetta
+ */
 public class ReservoirExactSolutionERM {
 	private double k = 0;
 	private double aXn = 0;

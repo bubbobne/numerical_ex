@@ -4,15 +4,17 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 import org.apache.commons.math3.ode.nonstiff.ClassicalRungeKuttaIntegrator;
-import org.apache.commons.math3.ode.sampling.StepHandler;
-import org.apache.commons.math3.ode.sampling.StepInterpolator;
 
 import eu.danieleandreis.reservoiresolver.ode.ReservoirApacheMathODE;
 import eu.danieleandreis.reservoiresolver.ode.ReservoirExactSolutionERM;
 
+/**
+ * Simple reservoir example
+ *
+ * @author Daniele Andreis and Giuseppe Formetta
+ */
 public class Main {
 	public static void main(String[] args) throws IOException {
 
