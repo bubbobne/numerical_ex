@@ -28,9 +28,7 @@ public class ReservoirApacheMathODE implements FirstOrderDifferentialEquations {
 	}
 
 	public double computeDischarge(double hNumerical) {
-		// TODO Auto-generated method stub
 		return (axn / k) * hNumerical;
-
 	}
 
 }
