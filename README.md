@@ -1,4 +1,6 @@
 # Reservoir Routing with Runge-Kutta and Apache Commons Math
+Giuseppe Formetta and Daniele Andreis
+
 
 ## Overview
 
